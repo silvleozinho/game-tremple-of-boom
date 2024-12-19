@@ -28,9 +28,9 @@ function preload() {
    
     this.load.image('background', 'assets/images/background.png');
     this.load.image('platform', 'assets/platform.png');
-    this.load.image('player', 'assets/player.png');
-    this.load.image('bullet', 'assets/bullet.png');
-    this.load.image('enemy', 'assets/enemy.png');
+    this.load.image('player', 'assets/images/player.png');
+    this.load.image('bullet', 'assets/images/bullet.png');
+    this.load.image('enemy', 'assets/images/enemy.png');
 
     //carregar audio
 
@@ -48,7 +48,10 @@ function create() {
     //adicionar plataformas
 
     platforms = this.physics.add.staticGroup();
-    platforms.create(400, 580, 'platform').setScale(2).refreshBody();
+    platforms.create(600, 500, 'platform').setScale(2).refreshBody();
+    
+    platforms = this.physics.add.staticGroup();
+    platforms.create(600, 400, 'platform').setScale(2).refreshBody();
 
     //add player
 
@@ -64,8 +67,8 @@ function create() {
 
     enemies = this.physics.add.group({
         key: 'enemy',
-        repeat: 3,
-        setXY: { x: 300, y: 0, stepX: 150 },
+        repeat: 4,
+        setXY: { x: 300     , y: 0, stepX: 150 },
     });
     enemies.children.iterate(function (enemy) {
         enemy.setBounce(1);
@@ -89,7 +92,7 @@ function create() {
     //add music fundo
 
     const backgroundMusic = this.sound.add('backgroundMusic'); backgroundMusic.play({
-        loop: true, volume: 0.5
+        loop: true, volume: 0.02
     });
 
     //add texto de pontuacao
@@ -129,7 +132,7 @@ function shootBullet(scene) {
 
     //tocar som tiro
 
-    scene.sound.play('shootSound',{ volume: 0.5 });
+    scene.sound.play('shootSound',{ volume: 0.03 });
 }
 
 function hitEnemy(bullet, enemy) {
@@ -138,7 +141,7 @@ function hitEnemy(bullet, enemy) {
 
     //tocar som explosao
 
-    this.sound.play('explosionSound',{ volume: 0.5 });
+    this.sound.play('explosionSound',{ volume: 0.05 });
 
     //atualizar pont
 
